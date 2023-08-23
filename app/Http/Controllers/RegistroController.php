@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use \App\Http\Requests\IndexRegistroRequest;
+use \App\Http\Requests\StoreRegistroRequest;
+use \App\Http\Requests\UpdateRegistroRequest;
 use App\Services\RegistroService;
 
 class RegistroController extends Controller
@@ -26,25 +27,25 @@ class RegistroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRegistroRequest $request)
     {
-        //
+        return $this->service->store($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRegistroRequest $request, int $id)
     {
-        //
+        $this->service->update($request->all(), $id);
     }
 
     /**
@@ -52,6 +53,6 @@ class RegistroController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->service->delete($id);
     }
 }

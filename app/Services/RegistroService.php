@@ -16,4 +16,25 @@ class RegistroService
         })
         ->get();
     }
+
+    public function store(array $params)
+    {
+        return Registro::create($params);
+    }
+
+    public function show(int $id)
+    {
+        return Registro::findOrFail($id);
+    }
+
+    public function update(array $params, int $id)
+    {
+        $registro = Registro::findOrFail($id);
+        return $registro->update($params);
+    }
+
+    public function delete(int $id)
+    {
+        return Registro::destroy($id);
+    }
 }
