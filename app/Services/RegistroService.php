@@ -14,6 +14,12 @@ class RegistroService
         ->when(isset($params['type']), function ($subQuery) use($params){
             $subQuery->where('type', $params['type']);
         })
+        ->when(isset($params['is_identified']), function ($subQuery) use($params){
+            $subQuery->where('is_identified', $params['is_identified']);
+        })
+        ->when(isset($params['orderBy']), function ($subQuery) use($params){
+            $subQuery->orderBy($params['orderBy']);
+        })
         ->get();
     }
 
