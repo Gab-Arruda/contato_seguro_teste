@@ -16,4 +16,31 @@ Caso você já tenha alguma experiência com Docker ou queira se aventurar, inse
 Caso ache a tarefa muito simples e queira implementar algo a mais, será muito bem visto. Nossa sugestão é implementar novos filtros (ex: `order_by`, `limit`, `offset`), outros métodos REST (`GET/{id}`, `POST`, `DELETE`, `PUT`, `PATCH`), testes unitários etc. Só pedimos que, caso faça algo do tipo, nos explique na _Resposta do participante_ abaixo.
 
 # Resposta do participante
-_Responda aqui quais foram suas dificuldades e explique a sua solução_
+Para esse projeto foi utilizado o Laravel, dentro da pasta source digite o seguinte comando para iniciar a api: _php artisan serve_
+
+### Rotas:
+As rotas de listagem, store e update possuem request personalizados para fazer a validação dos parâmetros passados e garantir a integridade dos dados.
+
+* Listar todos os registros: **GET - /registros**
+    - **deleted:** nullable| boolean - filtre registros a partir do campo deleted
+    - **type:** nullable | string | ['denuncia', 'sugestao', 'duvida'] - filtre por tipo
+    - **orderBy:** nullable | string | ['type', 'message', 'whistleblower_name', 'whistleblower_birth', 'created_at'] - ordene a listagem por cada coluna da tabela
+    - **is_identified:** nullable | boolean - filtre registros a partir do campo is_identified
+    - **page:** nullable | integer | gt:0 | required_with:per_page - número da página para retornar
+    - **per_page:** nullable | integer | gt:0 | required_with:page - número de itens por página
+* Retorno de um registro específico: **GET - /registros/{id}**
+* Store novo registro: **POST - /registros**
+    - **type:** required | string | ['denuncia', 'sugestao', 'duvida']
+    - **message:** required | string
+    - **is_identified:** required | boolean
+    - **whistleblower_name:** nullable | string
+    - **whistleblower_birth:** nullable | date_format:Y-m-d
+    - **deleted:** required | boolean
+* Update de um registro específico: **PUT - /registros/{id}**
+    - **type:** nullable | string | ['denuncia', 'sugestao', 'duvida']
+    - **message:** string
+    - **is_identified:** boolean
+    - **whistleblower_name:** string
+    - **whistleblower_birth:** date_format:Y-m-d
+    - **deleted:** boolean
+* DELETE - /registros/{id}
