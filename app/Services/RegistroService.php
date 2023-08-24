@@ -20,6 +20,9 @@ class RegistroService
         ->when(isset($params['orderBy']), function ($subQuery) use($params){
             $subQuery->orderBy($params['orderBy']);
         })
+        ->when(isset($params['per_page']), function ($subQuery) use($params){
+            $subQuery->paginate($params['per_page']);
+        })
         ->get();
     }
 

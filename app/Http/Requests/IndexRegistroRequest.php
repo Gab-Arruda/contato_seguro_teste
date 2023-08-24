@@ -21,6 +21,8 @@ class IndexRegistroRequest extends FormRequest
             'type' => ['nullable', 'string', Rule::in(['denuncia', 'sugestao', 'duvida'])],
             'orderBy' => ['nullable', 'string', Rule::in(['type', 'message', 'whistleblower_name', 'whistleblower_birth', 'created_at'])],
             'is_identified' => ['nullable', 'boolean'],
+            'page' => ['nullable', 'integer', 'gt:0', ' required_with:per_page'],
+            'per_page' => ['nullable', 'integer', 'gt:0', 'required_with:page'],
         ];
     }
 
