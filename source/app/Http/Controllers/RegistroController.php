@@ -45,7 +45,7 @@ class RegistroController extends Controller
      */
     public function update(UpdateRegistroRequest $request, int $id)
     {
-        $this->service->update($request->all(), $id);
+        return $this->service->update($request->all(), $id);
     }
 
     /**
@@ -53,6 +53,6 @@ class RegistroController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->service->delete($id);
+        return $this->service->delete($id);
     }
 }
