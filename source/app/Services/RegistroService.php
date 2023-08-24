@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Registro;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RegistroService
 {
@@ -44,6 +45,9 @@ class RegistroService
 
     public function delete(int $id)
     {
-        return Registro::destroy($id);
+        $registro = Registro::findOrFail($id);
+        if($registro) {
+            return $registro->delete();
+        }
     }
 }

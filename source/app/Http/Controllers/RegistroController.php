@@ -6,6 +6,7 @@ use \App\Http\Requests\IndexRegistroRequest;
 use \App\Http\Requests\StoreRegistroRequest;
 use \App\Http\Requests\UpdateRegistroRequest;
 use App\Services\RegistroService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RegistroController extends Controller
 {
