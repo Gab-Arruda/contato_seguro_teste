@@ -12,13 +12,14 @@ use Mockery;
 
 class RegistroTest extends TestCase
 {
-    protected $registroUnicoFake;
-    protected $registro_data;
+    protected $fakeRegistroJson;
+    protected $fakeRegistroModel;
+    protected $fakeRegistrosList;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->registro_data = [
+        $this->fakeRegistroJson = [
             'type' => 'denuncia',
             'message' => 'mensagem teste',
             'is_identified' => true,
@@ -27,26 +28,37 @@ class RegistroTest extends TestCase
             'deleted' => false,
             'created_at' => '2023-08-23 23:52:06'
         ];
-        $this->registroUnicoFake = new Registro($this->registro_data);
+        $this->fakeRegistroModel = new Registro($this->fakeRegistroJson);
+        $this->fakeRegistrosList = [$this->fakeRegistroJson, $this->fakeRegistroJson];
     }
 
-    public function test_registro_insert_success(): void
+    public function test_registro_list_empty(): void
     {
         $this->instance(RegistroService::class, Mockery::mock(RegistroService::class, function ($mock) {
-            $mock->shouldReceive('list')->andReturn($this->registroUnicoFake);
+            $mock->shouldReceive('list')->andReturn(collect([]));
+        }));
+        $this->get(route('index', ['deleted' => true]))
+        ->assertStatus(Response::HTTP_OK)
+        ->assertJson([]);
+    }
+
+    public function test_registro_list_success(): void
+    {
+        $this->instance(RegistroService::class, Mockery::mock(RegistroService::class, function ($mock) {
+            $mock->shouldReceive('list')->andReturn(collect([$this->fakeRegistroModel, $this->fakeRegistroModel]));
         }));
         $this->get(route('index'))
         ->assertStatus(Response::HTTP_OK)
-        ->assertJson($this->registro_data);
+        ->assertJson($this->fakeRegistrosList);
     }
 
     public function test_registro_show_success(): void
     {
         $this->instance(RegistroService::class, Mockery::mock(RegistroService::class, function ($mock) {
-            $mock->shouldReceive('show')->andReturn($this->registroUnicoFake);
+            $mock->shouldReceive('show')->andReturn($this->fakeRegistroModel);
         }));
         $this->get(route('show', ['id' => 999]))
         ->assertStatus(Response::HTTP_OK)
-        ->assertJson($this->registro_data);
+        ->assertJson($this->fakeRegistroJson);
     }
 }
