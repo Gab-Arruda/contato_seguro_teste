@@ -20,6 +20,8 @@ Para esse projeto foi utilizado o Laravel, dentro da pasta source digite o segui
 
 Alterei o banco para que o campo id fosse auto increment.
 
+Criei alguns testes unitários no arquivo RegistroTest.php
+
 ### Rotas:
 As rotas de listagem, store e update possuem request personalizados para fazer a validação dos parâmetros passados e garantir a integridade dos dados.
 
