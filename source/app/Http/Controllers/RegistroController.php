@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use \App\Http\Requests\IndexRegistroRequest;
 use \App\Http\Requests\StoreRegistroRequest;
 use \App\Http\Requests\UpdateRegistroRequest;
+use \App\Http\Requests\ShowDestroyRegistroRequest;
 use App\Services\RegistroService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RegistroController extends Controller
 {
@@ -30,30 +30,30 @@ class RegistroController extends Controller
      */
     public function store(StoreRegistroRequest $request)
     {
-        return $this->service->store($request->all());
+        return $this->service->store($request->validated());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(ShowDestroyRegistroRequest $request)
     {
-        return $this->service->show($id);
+        return $this->service->show($request->validated()['id']);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRegistroRequest $request, int $id)
+    public function update(UpdateRegistroRequest $request)
     {
-        return $this->service->update($request->all(), $id);
+        return $this->service->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ShowDestroyRegistroRequest $request)
     {
-        return $this->service->delete($id);
+        return $this->service->delete($request->validated()['id']);
     }
 }

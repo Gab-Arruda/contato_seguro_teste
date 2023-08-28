@@ -6,9 +6,8 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Carbon\Carbon;
 
-class StoreRegistroRequest extends FormRequest
+class ShowDestroyRegistroRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -18,19 +17,13 @@ class StoreRegistroRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', 'string', Rule::in(['denuncia', 'sugestao', 'duvida'])],
-            'message' => ['required', 'string'],
-            'is_identified' => ['required', 'boolean'],
-            'whistleblower_name' => ['nullable', 'string'],
-            'whistleblower_birth' => ['nullable', 'date_format:Y-m-d'],
-            'deleted' => ['required', 'boolean'],
-            'created_at' => ['required', 'date_format:Y-m-d H:i:s']
+            'id' => ['required', 'integer']
         ];
     }
 
     protected function prepareForValidation()
     {
-        $this->merge(['created_at' => Carbon::now()->format('Y-m-d H:i:s')]);
+        $this->merge(['id' => $this->route('id')]);
     }
 
     protected function failedValidation(Validator $validator)

@@ -22,8 +22,14 @@ class UpdateRegistroRequest extends FormRequest
             'is_identified' => ['nullable', 'boolean'],
             'whistleblower_name' => ['nullable', 'string'],
             'whistleblower_birth' => ['nullable', 'date_format:Y-m-d'],
-            'deleted' => ['nullable', 'boolean']
+            'deleted' => ['nullable', 'boolean'],
+            'id' => ['required', 'integer']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['id' => $this->route('id')]);
     }
 
     protected function failedValidation(Validator $validator)

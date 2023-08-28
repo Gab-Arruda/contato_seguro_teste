@@ -37,9 +37,9 @@ class RegistroService
         return Registro::findOrFail($id);
     }
 
-    public function update(array $params, int $id)
+    public function update(array $params)
     {
-        $registro = Registro::findOrFail($id);
+        $registro = Registro::findOrFail($params['id']);
         return $registro->update($params);
     }
 
