@@ -16,11 +16,12 @@ Caso você já tenha alguma experiência com Docker ou queira se aventurar, inse
 Caso ache a tarefa muito simples e queira implementar algo a mais, será muito bem visto. Nossa sugestão é implementar novos filtros (ex: `order_by`, `limit`, `offset`), outros métodos REST (`GET/{id}`, `POST`, `DELETE`, `PUT`, `PATCH`), testes unitários etc. Só pedimos que, caso faça algo do tipo, nos explique na _Resposta do participante_ abaixo.
 
 # Resposta do participante
-Para esse projeto foi utilizado o Laravel, dentro da pasta source digite o seguinte comando para iniciar a api: _php artisan serve_
+Para este projeto foi utilizado o Laravel 10 com php 8.1.7. Para utilizar o banco corretamente, coloque no .env o absolute path do arquivo do sqlite em DB_DATABASE. Para iniciar a api, dentro da pasta source digite o seguinte comando: _php artisan serve_
 
-Alterei o banco para que o campo id fosse auto increment.
+O arquivo SQLite que me foi enviado não tinha auto increment no id da tabela, considero correto utilizar o auto increment no banco, por isso acabei setando
+essa opção no SQLite.
 
-Criei alguns testes unitários no arquivo RegistroTest.php
+Criei alguns testes unitários no arquivo RegistroTest.php que podem ser rodados dentro da pasta source com o comando: _php artisan test_
 
 ### Rotas:
 As rotas de listagem, store e update possuem request personalizados para fazer a validação dos parâmetros passados e garantir a integridade dos dados.
