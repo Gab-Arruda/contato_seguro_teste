@@ -43,9 +43,9 @@ As rotas de listagem, store e update possuem request personalizados para fazer a
     - **deleted:** required | boolean
 * Update de um registro específico: **PUT - /registros/{id}**
     - **type:** nullable | string | ['denuncia', 'sugestao', 'duvida']
-    - **message:** string
-    - **is_identified:** boolean
-    - **whistleblower_name:** string
-    - **whistleblower_birth:** date_format:Y-m-d
-    - **deleted:** boolean
+    - **message:** nullable | string
+    - **is_identified:** nullable | boolean
+    - **whistleblower_name:** nullable | string
+    - **whistleblower_birth:** nullable | date_format:Y-m-d
+    - **deleted:** nullable | boolean
 * DELETE - /registros/{id}
